@@ -24,3 +24,6 @@ If you would like to start a conversation please contact me at simon@youvo.org! 
 
 There is no release date set yet. The module is subject to development.
 
+## Credits
+
+Currently, we use icons by Lucy Gonzales. Check out http://bylucyg.com/.

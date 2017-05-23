@@ -4,24 +4,84 @@ distribution. I will rework the CSS once the development is in a further
 stage. This means, the current CSS does not integrate well with the CSS 
 offered by a standard Drupal distribution. */
 
-table.nodemanager-table .short-column {
+/* Here we reset submit buttons to reshape them later. This might be 
+different to standard Drupal. */
+table input[type="submit"] {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	position: static;
+	top: auto;
+	box-shadow: none;
+	min-width: 0;
+	font-size: inherit;
+	font-weight: inherit;
+	text-transform: none;
+	line-height: 100%;
+	color: transparent;
+	width: 15px;
+  height: 15px;
+}
+
+table input[type="submit"]:hover {
+	top: auto;
+	box-shadow: none;
+}
+
+table input[type="submit"]:focus {
+	top: auto;
+	box-shadow: none;
+}
+
+table input[type="submit"]:active {
+	top: auto;
+	color: inherit;
+}
+
+/* Give columns some shaping. */
+table.nm .short-column {
 	width: 100px;
 }
 
-table.nodemanager-table .medium-column td{
+table.nm .medium-column td{
 	width: 200px;
 }
 
-table.nodemanager-table .long-column {
+table.nm .long-column {
 	width: 300px;
 }
 
-table.nodemanager-table tr td {
+table.nm tr td {
 	white-space: nowrap;
 	overflow: hidden;
 }
 
-table.nodemanager-table { 
+table.nm { 
 	table-layout:fixed; 
 	width:100%;
+}
+
+table.nm .options {
+	float: right;
+}
+
+/* Here we define the buttons for options. Note that these elements are 
+not within the table at first. */
+input[type="submit"].arrow-down-btn {
+  background: url(icons/down-arrow.svg) no-repeat center center;
+	background-size: 15px 15px;
+}
+
+.rotate input {
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
+
+table.nm .error {
+	float: left;
+	font-weight: bold;
+	margin: 0 10px;
+	color:red;
+	line-height:15px;
 }
