@@ -1,0 +1,8 @@
+name = nodemanager
+description = Project page node management tool
+package = Example modules
+core = 7.x
+dependencies[] = field
+dependencies[] = node
+dependencies[] = system
+files[] = includes/nodemanager.inc
