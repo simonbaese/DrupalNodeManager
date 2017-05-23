@@ -1,4 +1,4 @@
-name = nodemanager
+name = Nodemanager
 description = Project page node management tool
 package = Example modules
 core = 7.x

@@ -1,1 +1,27 @@
 /* CSS of nodemanager */
+/* Currently, the module is developed within a larger Drupal 
+distribution. I will rework the CSS once the development is in a further 
+stage. This means, the current CSS does not integrate well with the CSS 
+offered by a standard Drupal distribution. */
+
+table.nodemanager-table .short-column {
+	width: 100px;
+}
+
+table.nodemanager-table .medium-column td{
+	width: 200px;
+}
+
+table.nodemanager-table .long-column {
+	width: 300px;
+}
+
+table.nodemanager-table tr td {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+table.nodemanager-table { 
+	table-layout:fixed; 
+	width:100%;
+}
