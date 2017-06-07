@@ -81,6 +81,7 @@ function nodemanager_form($form, &$form_state) {
 				'callback' => 'nodemanager_options_inspect_ajax',
 				'effect' => 'none', 
 				'progress' => array('type' => 'none'),
+				'event' => 'click',
 			),
 			'#attributes' => array('class' => array('arrow-down-btn')),
 			'#limit_validation_errors' => array(),

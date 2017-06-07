@@ -35,7 +35,7 @@ table input[type="submit"]:focus {
 
 table input[type="submit"]:active {
 	top: auto;
-	color: inherit;
+	color: transparent;
 }
 
 /* Give columns some shaping. */
