@@ -88,18 +88,25 @@ function nodemanager_form($form, &$form_state) {
 			'#submit' => array(),	
 		);
 		
+		// Button for editing options.
+		$form['edit_'.$nid] = array(
+			'#markup' => '<span id="option-edit-id-'.$nid.'" data-nid="'.$nid.'" class="edit-btn"></span>',
+		);
+		
 		/* We will use this hidden container to store information that 
 		should be displayed when a user clicks an option. The display
 		is triggered by jQuery. */
-		$hidden .= '<tr id="content-row-'.$entry->nid.'">
+		$hidden .= '<tr id="content-row-'.$nid.'">
 			<td colspan="4"></td>
 		</tr>';
 		
 		/* We will use this hidden container to store futher options that 
 		should be displayed when a user clicks an option. The display
 		is triggered by jQuery. */
-		$hiddenoptions .= '<tr class="row-options" id="option1-row-'.$nid.'">
-			<td>
+		$hiddenoptions .= '<tr class="border-v row-options" id="edit-row-'.$nid.'">
+			<td colspan="3"></td>
+			<td colspan="1">
+				<span class="left"><a href="/node/'.$nid.'/edit" target="_blank">'.t('Edit node').'</a><br /><a href="/node/'.$nid.'/delete" target="_blank">'.t('Delete node').'</a></span>
 			</td>
 		</tr>';
 	}
@@ -117,6 +124,7 @@ function nodemanager_form($form, &$form_state) {
 	);
 	
 	// This form element holds the hidden objects.
+	// The first row is used to append content to this table with jQuery.
 	$form['hidden'] = array(
 		'#markup' => '<table style="display:none;">
 				<tr id="nm-hidden-content">

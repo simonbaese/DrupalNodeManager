@@ -72,6 +72,19 @@ input[type="submit"].arrow-down-btn {
 	background-size: 15px 15px;
 }
 
+.edit-btn {
+  background: url(icons/edit.svg) no-repeat center center;
+  background-size: 15px 15px;
+  cursor:pointer;
+	display:inline-block;
+  width: 15px;
+  height: 15px;
+}
+
+.options span {
+	margin: 0 5px;
+}
+
 .rotate input {
   -ms-transform: rotate(180deg); /* IE 9 */
   -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */

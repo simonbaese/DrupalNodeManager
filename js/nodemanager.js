@@ -33,14 +33,36 @@
 	Drupal.behaviors.nodeManager = {
 	  attach: function (context) {
 			
+			$('.edit-btn').once().on('click', function () {	
+				var nid = $(this).data('nid');
+				if($('tr#edit-row-'+nid).is(':visible')) {
+					$('tr#edit-row-'+nid).insertAfter($('tr#nm-hidden-content'));
+				} else {
+					hideContent();
+					$('tr.content-row:not(#content-row-'+nid+')').insertAfter($('tr#nm-hidden-content'));
+					$('tr.row-options').insertAfter($('tr#nm-hidden-content'));
+					$('tr#edit-row-'+nid).insertAfter($('tr#row-'+nid));
+				}
+			});
+			
 			$(document).ready(function() {			
 					// Move form elements into table.
 					$('[id^=option-inspect-id-]').each(function() {
 						var nid = $(this).data('nid');
 						$('div#row-buttons-'+nid).prepend(this);
 					});	
+					$('[id^=option-edit-id-]').each(function () {
+						var nid = $(this).data('nid');
+						$('div#row-buttons-'+nid).prepend(this);
+					});
 					
-			});		
+			});
+
+			function hideContent(){
+				$('tr.content-row').insertAfter($('tr#nm-hidden-content'));
+				$('span.rotate').removeClass('rotate');
+				$('tr.content-row td').empty();
+			}
 		}
 	}
 	
