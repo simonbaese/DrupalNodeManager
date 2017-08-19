@@ -51,7 +51,7 @@ table.nm .long-column {
 	width: 300px;
 }
 
-table.nm tr td {
+table.nm tr:not(.content-row) td  {
 	white-space: nowrap;
 	overflow: hidden;
 }
