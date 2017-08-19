@@ -9,6 +9,9 @@ function nodemanager_form($form, &$form_state) {
     
 	// global $user;
 	
+	// Make sure that the AJAX library is available.
+	$form['#attached']['library'][] = array('system', 'drupal.ajax');
+	
 	$form['#attached']['css'] = array(
 	  drupal_get_path('module', 'nodemanager') . '/css/nodemanager.css',
 	);	
@@ -17,6 +20,7 @@ function nodemanager_form($form, &$form_state) {
 	);
 	
 	// Safe for nid.
+	// We make this a hidden field, so we can modify it with jQuery.
 	$form['nid'] = array(
 		'#type' => 'hidden',
 		'#default_value' => 0,
@@ -99,7 +103,10 @@ function nodemanager_form($form, &$form_state) {
 		$hiddenoptions .= '<tr class="border-v row-options" id="edit-row-'.$nid.'">
 			<td colspan="3"></td>
 			<td colspan="1">
-				<span class="left"><a href="/node/'.$nid.'/edit" target="_blank">'.t('Edit node').'</a><br /><a href="/node/'.$nid.'/delete" target="_blank">'.t('Delete node').'</a></span>
+				<span class="left">
+					<a href="/node/'.$nid.'/edit" target="_blank">'.t('Edit node').'</a><br />
+					<a href="/node/'.$nid.'/delete" target="_blank">'.t('Delete node').'</a>
+				</span>
 			</td>
 		</tr>';
 	}
@@ -110,7 +117,7 @@ function nodemanager_form($form, &$form_state) {
 	
 	// Here we call the hidden submit functions!
 	// These are not displayed and triggered by there respective buttons via jQuery.
-	$form['inspect_submit'] = youvomanager_common_submits('inspect_submit');
+	$form['inspect_submit'] = nodemanager_common_submits('inspect');
 	
 	// Draw table. 
 	$form['table'] = array(
@@ -142,39 +149,28 @@ function nodemanager_form($form, &$form_state) {
  * AJAX callback to inspect node.
  * At the moment we load the full view of a node.
  */
-function nodemanager_options_inspect_ajax($form, &$form_state){
+function nodemanager_common_ajax_inspect($form, &$form_state){
   
-	$nid = $form_state['triggering_element']['#value'];
-	
-	// Check if node can be loaded
-	if($node = node_load($nid)){  	
-		// We get node view here and render markup.
+	$nid = $form_state['values']['nid'];
+
+	if($node = node_load($nid)){  
 		$nodeview = node_view($node,'full');
 		$nodemarkup = drupal_render($nodeview);
-		// Return AJAX response.
-		// Use custom attach function to move rendered node into table.
-		// We need to reattach Drupal behaviors. Otherwise some functionality might be blocked.
+		$command = array();
+		$command[] = ajax_command_invoke(NULL, 'customAttach', array($nid, $nodemarkup, 1));
+		$command[] = array('command' => 'nodeManagerReattach');
 		return array(
 			'#type' => 'ajax',
-			'#commands' => array(
-				ajax_command_invoke(NULL, 'customAttach', array($nid, $nodemarkup)),
-				array('command' => 'nodeManagerReattach'),
-			),
+			'#commands' => $command,
 		);		
-		
-	// If node can not be loaded return error.
 	} else {
-		// Return AJAX response.
-		// Hide options row and display error.
-		// We need to reattach Drupal behaviors. Otherwise some functionality might be blocked.
+		$command = array();
+		$command[] = ajax_command_invoke('#row-buttons-'.$nid.' span','hide');
+		$command[] = ajax_command_append('#row-buttons-'.$nid, '<span class="left bold" style="margin: 0 10px;color:red;line-height:15px;">'.t('Error!').'</span>');
+		$command[] = array('command' => 'nodeManagerReattach');
 		return array(
 			'#type' => 'ajax',
-			'#commands' => array(		
-				ajax_command_invoke('#row-buttons-'.$nid.' span','hide'),
-				ajax_command_append('#row-buttons-'.$nid, '<span class="error">'.t('Error!').'</span>'),
-				array('command' => 'nodeManagerReattach'),
-			),
+			'#commands' => $command,
 		);
 	}
-
 }

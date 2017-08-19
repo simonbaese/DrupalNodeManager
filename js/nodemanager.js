@@ -55,9 +55,8 @@
 					// Move form elements into table.
 					// Move buttons for options into button row of table.
 					$('.js-place-btn-row').each(function () {
-						if($(this).attr('data-nid')) var id = $(this).data('nid');
-						else var id = $(this).data('sid');
-						$('div#row-buttons-'+id).prepend(this);
+						var nid = $(this).data('nid');
+						$('div#row-buttons-'+nid).prepend(this);
 					}); 
 					
 			});
