@@ -67,12 +67,16 @@ table.nm .options {
 
 /* Here we define the buttons for options. Note that these elements are 
 not within the table at first. */
-input[type="submit"].arrow-down-btn {
+.nm-inspect {
   background: url(icons/down-arrow.svg) no-repeat center center;
 	background-size: 15px 15px;
+	cursor:pointer;
+	display:inline-block;
+  width: 15px;
+  height: 15px;
 }
 
-.edit-btn {
+.nm-edit {
   background: url(icons/edit.svg) no-repeat center center;
   background-size: 15px 15px;
   cursor:pointer;

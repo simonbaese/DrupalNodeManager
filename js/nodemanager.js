@@ -33,7 +33,7 @@
 	Drupal.behaviors.nodeManager = {
 	  attach: function (context) {
 			
-			$('.edit-btn').once().on('click', function () {	
+			$('.nm-edit').once().on('click', function () {	
 				var nid = $(this).data('nid');
 				if($('tr#edit-row-'+nid).is(':visible')) {
 					$('tr#edit-row-'+nid).insertAfter($('tr#nm-hidden-content'));
@@ -45,16 +45,20 @@
 				}
 			});
 			
+			$('.nm-inspect').once().on('click', function () {	
+				var nid = $(this).data('nid');
+				$('input[name=nid]').val(nid);
+				$('input[type=submit]#edit-inspect-submit').click();
+			});	
+			
 			$(document).ready(function() {			
 					// Move form elements into table.
-					$('[id^=option-inspect-id-]').each(function() {
-						var nid = $(this).data('nid');
-						$('div#row-buttons-'+nid).prepend(this);
-					});	
-					$('[id^=option-edit-id-]').each(function () {
-						var nid = $(this).data('nid');
-						$('div#row-buttons-'+nid).prepend(this);
-					});
+					// Move buttons for options into button row of table.
+					$('.js-place-btn-row').each(function () {
+						if($(this).attr('data-nid')) var id = $(this).data('nid');
+						else var id = $(this).data('sid');
+						$('div#row-buttons-'+id).prepend(this);
+					}); 
 					
 			});
 

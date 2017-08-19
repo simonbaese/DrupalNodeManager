@@ -1,5 +1,7 @@
 <?php 
 
+module_load_include('inc', 'nodemanager', 'includes/nodemanager.common.buttons');
+
 /**
  * This is the main function for the node management tool
  */
@@ -12,6 +14,12 @@ function nodemanager_form($form, &$form_state) {
 	);	
 	$form['#attached']['js'] = array(
 		drupal_get_path('module', 'nodemanager') . '/js/nodemanager.js',
+	);
+	
+	// Safe for nid.
+	$form['nid'] = array(
+		'#type' => 'hidden',
+		'#default_value' => 0,
 	);
 	
 	// Header.
@@ -37,7 +45,8 @@ function nodemanager_form($form, &$form_state) {
 	// Execute query.
 	$entries = $query->execute()->fetchAll();
 	
-	// Initialize rows.
+	// Initialize variables.
+	$buttons = '';
 	$rows = array();
 	$hidden = '';
 	$hiddenoptions = '';
@@ -71,27 +80,11 @@ function nodemanager_form($form, &$form_state) {
 		The identifier is the id of the container. */
 		
 		// Button to inspect node.
-		$form['inspect_'.$nid] = array(
-			'#type' => 'submit',
-			'#name' => 'inspect_'.$nid,
-			'#value' => $nid,
-			'#prefix' => '<span id="option-inspect-id-'.$nid.'" data-nid="'.$nid.'">',
-			'#suffix' => '</span>',
-			'#ajax' => array(
-				'callback' => 'nodemanager_options_inspect_ajax',
-				'effect' => 'none', 
-				'progress' => array('type' => 'none'),
-				'event' => 'click',
-			),
-			'#attributes' => array('class' => array('arrow-down-btn')),
-			'#limit_validation_errors' => array(),
-			'#submit' => array(),	
-		);
+		// We need to call youvomanager_common_submits('inspect_submit') later!
+		$buttons .= nodemanager_common_buttons('inspect', $nid);
 		
 		// Button for editing options.
-		$form['edit_'.$nid] = array(
-			'#markup' => '<span id="option-edit-id-'.$nid.'" data-nid="'.$nid.'" class="edit-btn"></span>',
-		);
+		$buttons .= nodemanager_common_buttons('edit', $nid);
 		
 		/* We will use this hidden container to store information that 
 		should be displayed when a user clicks an option. The display
@@ -110,6 +103,14 @@ function nodemanager_form($form, &$form_state) {
 			</td>
 		</tr>';
 	}
+	
+	// Accumulate buttons.
+	// Here we deliver the buttons to be rendered.
+	$form['buttons'] = array('#markup' => $buttons);
+	
+	// Here we call the hidden submit functions!
+	// These are not displayed and triggered by there respective buttons via jQuery.
+	$form['inspect_submit'] = youvomanager_common_submits('inspect_submit');
 	
 	// Draw table. 
 	$form['table'] = array(
