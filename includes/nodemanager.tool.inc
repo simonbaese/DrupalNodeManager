@@ -1,6 +1,8 @@
 <?php 
 
+// Include files.
 module_load_include('inc', 'nodemanager', 'includes/nodemanager.common.buttons');
+module_load_include('inc', 'nodemanager', 'includes/nodemanager.helpers');
 
 /**
  * This is the main function for the node management tool
@@ -33,7 +35,7 @@ function nodemanager_form($form, &$form_state) {
    
 	// Set table header.
 	$header = array(
-		array('data' => t('Events'), 'class' => array('short-column')),
+		array('data' => t('Created'), 'class' => array('short-column')),
 		array('data' => t('Title'), 'class' => array('long-column')),
 		array('data' => t('Author'), 'class' => array('medium-column')),
 		array('data' => '', 'class' => array('options-column')),
@@ -43,8 +45,8 @@ function nodemanager_form($form, &$form_state) {
 	// At the moment we use a node type called 'project'. We will later make this administerable.
 	// Limit range to 10 for development.
 	$query = db_select('node','n')->fields('n')->extend('TableSort');
-	$query->condition('n.type','project')->range(0,10);
-	$query->orderByHeader($header)->orderBy('n.created','DESC');
+	$query->condition('n.type', 'project')->range(0, 10);
+	$query->orderByHeader($header)->orderBy('n.created', 'DESC');
 	
 	// Execute query.
 	$entries = $query->execute()->fetchAll();
@@ -64,16 +66,14 @@ function nodemanager_form($form, &$form_state) {
 		$uid = $entry->uid;
 		
 		// Fetch username of author
-		$query = db_select('users','u')->fields('u',array('name'));
-		$query->condition('u.uid',$entry->uid);
-		$author = $query->execute()->fetchField();
+		$author = nodemanager_helpers_get_author($uid);
 		
 		// Fill row.
 		$rows[] = array(
 			'data' => array(
-				array('data' => date("m.d.Y",$entry->created)),
-				array('data' => l(check_plain($entry->title),'/node/'.$nid)),
-				array('data' => l(check_plain($author),'/user/'.$uid)),
+				array('data' => date("m.d.Y", $entry->created)),
+				array('data' => l(check_plain($entry->title), '/node/'.$nid)),
+				array('data' => l($author, '/user/'.$uid)),
 				array('data' => '<div id="row-buttons-'.$nid.'" class="options"></div>'),
 				),
 			'id' => array('row-'.$nid),
