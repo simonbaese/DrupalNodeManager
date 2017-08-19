@@ -96,7 +96,7 @@ function nodemanager_form($form, &$form_state) {
 		/* We will use this hidden container to store information that 
 		should be displayed when a user clicks an option. The display
 		is triggered by jQuery. */
-		$hidden .= '<tr id="content-row-'.$nid.'">
+		$hidden .= '<tr id="content-row-'.$nid.'" class="content-row">
 			<td colspan="4"></td>
 		</tr>';
 		
@@ -130,7 +130,7 @@ function nodemanager_form($form, &$form_state) {
 		'#theme' => 'table',
 		'#attributes' => array(
 			'class' => array('nm'),
-			'id' => array('nodemanager-table'),
+			'id' => array('nm-table'),
 		),
 		'#header' => !empty($rows) ? $header : array(),
 		'#rows' => $rows,

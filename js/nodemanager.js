@@ -51,6 +51,14 @@
 				$('input[type=submit]#edit-inspect-submit').click();
 			});	
 			
+			// Hide everything on body click
+			$('body').once().on('click',function(event) {
+				if($(event.target).closest('#nm-table').length == 0) {
+				hideContent();
+				$('tr.row-options').insertAfter($('tr#nm-hidden-content'));
+				}
+			});
+			
 			$(document).ready(function() {			
 					// Move form elements into table.
 					// Move buttons for options into button row of table.
