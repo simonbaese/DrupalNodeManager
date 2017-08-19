@@ -2,9 +2,9 @@
 
 (function ($) {
 	
-	$.fn.customAttach = function(nid, nodeview) {
+	$.fn.customAttach = function(nid, nodeview, rotate) {
 		if($('tr#content-row-'+nid).is(':visible')) {
-			$('#option-inspect-id-'+nid).removeClass('rotate');
+			$('#nm-inspect-id-'+nid).removeClass('rotate');
 			$('tr#content-row-'+nid).insertAfter($('tr#nm-hidden-content'));
 			$('tr#content-row-'+nid+' td').empty();
 		} else {
@@ -22,7 +22,7 @@
 				var $set = $(this);
 				$set.replaceWith($set.contents());
 			});
-			$('#option-inspect-id-'+nid).addClass('rotate');
+			if(rotate) $('#nm-inspect-id-'+nid).addClass('rotate');
 		}
 	};
 	
