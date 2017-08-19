@@ -57,6 +57,9 @@ function nodemanager_form($form, &$form_state) {
 	$hidden = '';
 	$hiddenoptions = '';
 	
+	// Use this container to hide options on page load. Prefix.
+	$form['hide_prefix'] = array('#markup' => '<div class="element-invisible">');
+	
 	// We iterate over all query results.
 	// Might have to work on variable names here.
 	foreach($entries as $entry) {
@@ -118,6 +121,9 @@ function nodemanager_form($form, &$form_state) {
 	// Here we call the hidden submit functions!
 	// These are not displayed and triggered by there respective buttons via jQuery.
 	$form['inspect_submit'] = nodemanager_common_submits('inspect');
+	
+	// Use this container to hide options on page load. Suffix.
+	$form['hide_suffix'] = array('#markup' => '</div>');
 	
 	// Draw table. 
 	$form['table'] = array(
