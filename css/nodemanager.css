@@ -116,3 +116,9 @@ table.nm .nm-header-status {
   background-size: 23px 23px;
   height: 23px;
 }
+
+table.nm .nm-header-promote {
+  background: url(icons/promote.svg) no-repeat center center;
+  background-size: 20px 20px;
+  height: 20px;
+}
