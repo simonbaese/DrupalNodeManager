@@ -1,7 +1,13 @@
 <?php
 
-/*
- * Get user name of node author.
+/**
+ * Query for user name with given user id.
+ *
+ * @param integer $uid
+ *   The user id.
+ *
+ * @return string
+ *   Name of user.
  */
 function nodemanager_helpers_get_author($uid) {
 

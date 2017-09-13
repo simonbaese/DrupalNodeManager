@@ -2,6 +2,14 @@
 
 /**
  * Common trigger buttons.
+ *
+ * @param $type
+ *   Type of requested button.
+ * @param $nid
+ *   Node identifier.
+ *
+ * @return string
+ *   Holds markup for button.
  */
 function nodemanager_common_buttons($type, $nid) {
 
@@ -10,6 +18,12 @@ function nodemanager_common_buttons($type, $nid) {
 
 /*
  * Common submit buttons.
+ *
+ * @param $type
+ *   Type of requested submit button.
+ *
+ * @return array
+ *   Array that will render submit button with Drupal Form API.
  */
 function nodemanager_common_submits($type) {
 

@@ -5,7 +5,19 @@ module_load_include('inc', 'nodemanager', 'includes/nodemanager.common.buttons')
 module_load_include('inc', 'nodemanager', 'includes/nodemanager.helpers');
 
 /**
- * This is the main function for the node management tool
+ * This is the main function for the node management tool.
+ *
+ * This function contains the main query for nodes and builds
+ * a table filled with information. Each row has attached
+ * options that offer different functionality regarding
+ * the given node.
+ *
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ * @param $form_state
+ *   A keyed array containing the current state of the form.
+ *
+ * @return array $form
  */
 function nodemanager_form($form, &$form_state) {
 
@@ -42,7 +54,8 @@ function nodemanager_form($form, &$form_state) {
   );
 
   // Query database for nodes.
-  // At the moment we use a node type called 'project'. We will later make this administerable.
+  // At the moment we use a node type called 'project'.
+  // We will later add functionality to administer this.
   // Limit range to 10 for development.
   $query = db_select('node', 'n')->fields('n')->extend('TableSort');
   $query->condition('n.type', 'project')->range(0, 10);
@@ -154,6 +167,13 @@ function nodemanager_form($form, &$form_state) {
 /**
  * AJAX callback to inspect node.
  * At the moment we load the full view of a node.
+ *
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ * @param $form_state
+ *   A keyed array containing the current state of the form.
+ *
+ * @return array $form
  */
 function nodemanager_common_ajax_inspect($form, &$form_state) {
 
