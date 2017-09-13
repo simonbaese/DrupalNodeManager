@@ -10,7 +10,7 @@ function nodemanager_menu() {
     'title' => t('Node manager'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nodemanager_form'),
-    'access callback' => TRUE,
+    'access callback' => 'user_access',
     'access arguments' => array('observe nodes'),
     'file' => 'includes/nodemanager.tool.inc',
     'type' => MENU_NORMAL_ITEM,
