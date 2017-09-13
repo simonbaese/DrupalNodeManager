@@ -21,7 +21,7 @@ function nodemanager_common_submits($type) {
       'callback' => 'nodemanager_common_ajax_' . $type,
       'effect' => 'none',
       'progress' => array('type' => 'none'),
-      'event' => 'click', // This is important to be able to trigger by jQUery!
+      'event' => 'click', // This is important to be able to trigger by jQuery!
     ),
     '#attributes' => array('class' => array('element-invisible')),
     '#limit_validation_errors' => array(array('nid')),

@@ -55,7 +55,7 @@ function nodemanager_form($form, &$form_state) {
   $buttons = '';
   $rows = array();
   $hidden = '';
-  $hiddenoptions = '';
+  $hidden_options = '';
 
   // Use this container to hide options on page load. Prefix.
   $form['hide_prefix'] = array('#markup' => '<div class="element-invisible">');
@@ -103,7 +103,7 @@ function nodemanager_form($form, &$form_state) {
     /* We will use this hidden container to store futher options that
     should be displayed when a user clicks an option. The display
     is triggered by jQuery. */
-    $hiddenoptions .= '<tr class="border-v row-options" id="edit-row-' . $nid . '">
+    $hidden_options .= '<tr class="border-v row-options" id="edit-row-' . $nid . '">
 			<td colspan="3"></td>
 			<td colspan="1">
 				<span class="left">
@@ -144,7 +144,7 @@ function nodemanager_form($form, &$form_state) {
 				<tr id="nm-hidden-content">
 				</tr>' .
       $hidden .
-      $hiddenoptions .
+      $hidden_options .
       '</table>',
   );
 
@@ -160,10 +160,10 @@ function nodemanager_common_ajax_inspect($form, &$form_state) {
   $nid = $form_state['values']['nid'];
 
   if ($node = node_load($nid)) {
-    $nodeview = node_view($node, 'full');
-    $nodemarkup = drupal_render($nodeview);
+    $node_view = node_view($node, 'full');
+    $node_markup = drupal_render($node_view);
     $command = array();
-    $command[] = ajax_command_invoke(NULL, 'customAttach', array($nid, $nodemarkup, 1));
+    $command[] = ajax_command_invoke(NULL, 'customAttach', array($nid, $node_markup, 1));
     $command[] = array('command' => 'nodeManagerReattach');
 
     return array(
