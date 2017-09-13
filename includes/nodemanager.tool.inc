@@ -26,6 +26,7 @@ function nodemanager_form($form, &$form_state) {
   // Make sure that the AJAX library is available.
   $form['#attached']['library'][] = array('system', 'drupal.ajax');
 
+  // Add assets.
   $form['#attached']['css'] = array(
     drupal_get_path('module', 'nodemanager') . '/css/nodemanager.css',
   );
@@ -54,6 +55,9 @@ function nodemanager_form($form, &$form_state) {
     array('data' => t('Author'), 'class' => array('medium-column')),
     array('data' => '', 'class' => array('options-column')),
   );
+
+  // Count header elements for later use in colspan.
+  $column_count = count($header);
 
   // Query database for nodes.
   // At the moment we use a node type called 'project'.
@@ -114,14 +118,14 @@ function nodemanager_form($form, &$form_state) {
     should be displayed when a user clicks an option. The display
     is triggered by jQuery. */
     $hidden .= '<tr id="content-row-' . $nid . '" class="content-row">
-			<td colspan="4"></td>
+			<td colspan="' . $column_count . '"></td>
 		</tr>';
 
     /* We will use this hidden container to store further options that
     should be displayed when a user clicks an option. The display
     is triggered by jQuery. */
     $hidden_options .= '<tr class="border-v row-options" id="edit-row-' . $nid . '">
-			<td colspan="3"></td>
+			<td colspan="' . ($column_count - 1) . '"></td>
 			<td colspan="1">
 				<span class="left">
 					<a href="/node/' . $nid . '/edit" target="_blank">' . t('Edit node') . '</a><br />
