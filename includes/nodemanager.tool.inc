@@ -6,7 +6,6 @@ module_load_include('inc', 'nodemanager', 'includes/nodemanager.helpers');
 
 /**
  * This is the main function for the node management tool.
- *
  * This function contains the main query for nodes and builds
  * a table filled with information. Each row has attached
  * options that offer different functionality regarding
@@ -82,14 +81,14 @@ function nodemanager_form($form, &$form_state) {
     $uid = $entry->uid;
 
     // Fetch username of author
-    $author = nodemanager_helpers_get_author($uid);
+    $author_name = nodemanager_helpers_get_author($uid);
 
     // Fill row.
     $rows[] = array(
       'data' => array(
         array('data' => date("m.d.Y", $entry->created)),
         array('data' => l(check_plain($entry->title), '/node/' . $nid)),
-        array('data' => l($author, '/user/' . $uid)),
+        array('data' => l($author_name, '/user/' . $uid)),
         array('data' => '<div id="row-buttons-' . $nid . '" class="options"></div>'),
       ),
       'id' => array('row-' . $nid),
@@ -113,7 +112,7 @@ function nodemanager_form($form, &$form_state) {
 			<td colspan="4"></td>
 		</tr>';
 
-    /* We will use this hidden container to store futher options that
+    /* We will use this hidden container to store further options that
     should be displayed when a user clicks an option. The display
     is triggered by jQuery. */
     $hidden_options .= '<tr class="border-v row-options" id="edit-row-' . $nid . '">
@@ -121,6 +120,7 @@ function nodemanager_form($form, &$form_state) {
 			<td colspan="1">
 				<span class="left">
 					<a href="/node/' . $nid . '/edit" target="_blank">' . t('Edit node') . '</a><br />
+					<a href="/user/' . $uid . '/edit" target="_blank">' . t('Edit author') . '</a><br />
 					<a href="/node/' . $nid . '/delete" target="_blank">' . t('Delete node') . '</a>
 				</span>
 			</td>
