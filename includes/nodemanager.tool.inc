@@ -48,6 +48,7 @@ function nodemanager_form($form, &$form_state) {
   // Set table header.
   $header = array(
     array('data' => t('Created'), 'class' => array('short-column')),
+    array('data' => '<div class="nm-header-status"></div>', 'class' => array('icon-column')),
     array('data' => t('Title'), 'class' => array('long-column')),
     array('data' => t('Author'), 'class' => array('medium-column')),
     array('data' => '', 'class' => array('options-column')),
@@ -88,6 +89,7 @@ function nodemanager_form($form, &$form_state) {
     $rows[] = array(
       'data' => array(
         array('data' => date("m.d.Y", $entry->created)),
+        array('data' => $entry->status, 'class' => array('centered')),
         array('data' => l(check_plain($entry->title), '/node/' . $nid)),
         array('data' => l($author_name, '/user/' . $uid)),
         array('data' => '<div id="row-buttons-' . $nid . '" class="options"></div>'),
