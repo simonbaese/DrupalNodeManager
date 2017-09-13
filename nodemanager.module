@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 /**
  * Implements hook_menu()
  */
 function nodemanager_menu() {
-	
-	$items['admin/content/nodemanager'] = array(
+
+  $items['admin/content/nodemanager'] = array(
     'title' => t('Node manager'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nodemanager_form'),
@@ -14,7 +14,7 @@ function nodemanager_menu() {
     'file' => 'includes/nodemanager.tool.inc',
     'type' => MENU_NORMAL_ITEM,
   );
-  
+
   return $items;
 }
 
@@ -26,9 +26,9 @@ function nodemanager_permission() {
     'manage nodes' => array(
       'title' => t('Right to administer nodes'),
     ),
-		'observe nodes' => array(
-				'title' => t('Right to access node manager'),
-			),
+    'observe nodes' => array(
+      'title' => t('Right to access node manager'),
+    ),
   );
 }
 
@@ -36,12 +36,12 @@ function nodemanager_permission() {
  * Implementation of hook_mail().
  */
 function nodemanager_mail($key, &$message, $params) {
-  
-  switch($key) {
-		case 'nodemanager_mail':
-			$message['subject'] = $params['subject'];
-			$message['body'] = $params['body'];
-			$message['headers'] = array_replace($message['headers'], $params['headers']);
-			break;
-	}
+
+  switch ($key) {
+    case 'nodemanager_mail':
+      $message['subject'] = $params['subject'];
+      $message['body'] = $params['body'];
+      $message['headers'] = array_replace($message['headers'], $params['headers']);
+      break;
+  }
 }

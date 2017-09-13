@@ -3,7 +3,7 @@
  * Implements hook_install().
  */
 function nodemanager_install() {
-	
+
   // Update module weight for this module's hook_cron to be executed after the main one
   db_query("UPDATE {system} SET weight = 11 WHERE name = 'nodemanager'");
 }
@@ -12,6 +12,6 @@ function nodemanager_install() {
  * Implements hook_uninstall().
  */
 function nodemanager_uninstall() {
-  
-	// Nothing to do here yet
+
+  // Nothing to do here yet
 }

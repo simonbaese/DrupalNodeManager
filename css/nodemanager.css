@@ -7,98 +7,98 @@ offered by a standard Drupal distribution. */
 /* Here we reset submit buttons to reshape them later. This might be 
 different to standard Drupal. */
 table input[type="submit"] {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	position: static;
-	top: auto;
-	box-shadow: none;
-	min-width: 0;
-	font-size: inherit;
-	font-weight: inherit;
-	text-transform: none;
-	line-height: 100%;
-	color: transparent;
-	width: 15px;
-  height: 15px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: static;
+    top: auto;
+    box-shadow: none;
+    min-width: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    text-transform: none;
+    line-height: 100%;
+    color: transparent;
+    width: 15px;
+    height: 15px;
 }
 
 table input[type="submit"]:hover {
-	top: auto;
-	box-shadow: none;
+    top: auto;
+    box-shadow: none;
 }
 
 table input[type="submit"]:focus {
-	top: auto;
-	box-shadow: none;
+    top: auto;
+    box-shadow: none;
 }
 
 table input[type="submit"]:active {
-	top: auto;
-	color: transparent;
+    top: auto;
+    color: transparent;
 }
 
 /* Give columns some shaping. */
 table.nm .short-column {
-	width: 100px;
+    width: 100px;
 }
 
-table.nm .medium-column td{
-	width: 200px;
+table.nm .medium-column td {
+    width: 200px;
 }
 
 table.nm .long-column {
-	width: 300px;
+    width: 300px;
 }
 
-table.nm tr:not(.content-row) td  {
-	white-space: nowrap;
-	overflow: hidden;
+table.nm tr:not(.content-row) td {
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-table.nm { 
-	table-layout:fixed; 
-	width:100%;
+table.nm {
+    table-layout: fixed;
+    width: 100%;
 }
 
 table.nm .options {
-	float: right;
+    float: right;
 }
 
 /* Here we define the buttons for options. Note that these elements are 
 not within the table at first. */
 .nm-inspect {
-  background: url(icons/down-arrow.svg) no-repeat center center;
-	background-size: 15px 15px;
-	cursor:pointer;
-	display:inline-block;
-  width: 15px;
-  height: 15px;
+    background: url(icons/down-arrow.svg) no-repeat center center;
+    background-size: 15px 15px;
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
 }
 
 .nm-edit {
-  background: url(icons/edit.svg) no-repeat center center;
-  background-size: 15px 15px;
-  cursor:pointer;
-	display:inline-block;
-  width: 15px;
-  height: 15px;
+    background: url(icons/edit.svg) no-repeat center center;
+    background-size: 15px 15px;
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
 }
 
 .options span {
-	margin: 0 5px;
+    margin: 0 5px;
 }
 
 .rotate {
-  -ms-transform: rotate(180deg); /* IE 9 */
-  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-  transform: rotate(180deg);
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
 }
 
 table.nm .error {
-	float: left;
-	font-weight: bold;
-	margin: 0 10px;
-	color:red;
-	line-height:15px;
+    float: left;
+    font-weight: bold;
+    margin: 0 10px;
+    color: red;
+    line-height: 15px;
 }
