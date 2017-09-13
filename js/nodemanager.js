@@ -30,7 +30,7 @@
     }
   };
 
-  Drupal.Ajax.prototype.commands.nodeManagerReattach = function (ajax, response, status) {
+  Drupal.ajax.prototype.commands.nodeManagerReattach = function (ajax, response, status) {
     Drupal.attachBehaviors();
   };
 
