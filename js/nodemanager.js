@@ -74,7 +74,10 @@
         // Move buttons for options into button row of table.
         $('.js-place-btn-row').each(function () {
           var nid = $(this).data('nid');
-          $('div#row-buttons-' + nid).prepend(this);
+          if(!$(this).hasClass('js-placed')) {
+            $('div#row-buttons-' + nid).prepend(this);
+            $(this).addClass('js-placed');
+          }
         });
 
       });
