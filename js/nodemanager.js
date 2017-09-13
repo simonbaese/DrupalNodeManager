@@ -2,7 +2,7 @@
 
 (function ($) {
 
-  $.fn.customAttach = function (nid, nodeview, rotate) {
+  $.fn.customAttach = function (nid, nodeView, rotate) {
 
     var contentRow = $('tr#content-row-' + nid);
     var hiddenContent = $('tr#nm-hidden-content');
@@ -15,7 +15,7 @@
       $('tr.content-row').insertAfter(hiddenContent);
       $('span.rotate').removeClass('rotate');
       $('tr.content-row td').empty();
-      $('tr#content-row-' + nid + ' td').append(nodeview);
+      $('tr#content-row-' + nid + ' td').append(nodeView);
       if ($('div#row-options-' + nid).is(':visible')) {
         contentRow.insertAfter($('tr#row-' + nid).next()).hide();
       } else {
