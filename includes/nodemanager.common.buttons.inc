@@ -32,7 +32,7 @@ function nodemanager_common_submits($type) {
     '#name' => $type . '_submit',
     '#value' => $type . '_submit',
     '#ajax' => array(
-      'callback' => 'nodemanager_common_ajax_' . $type,
+      'callback' => 'nodemanager_ajax_' . $type,
       'effect' => 'none',
       'progress' => array('type' => 'none'),
       'event' => 'click', // This is important to be able to trigger by jQuery!
