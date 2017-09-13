@@ -155,11 +155,9 @@ function nodemanager_form($form, &$form_state) {
   // The first row is used to append content to this table with jQuery.
   $form['hidden'] = array(
     '#markup' => '<table style="display:none;">
-				<tr id="nm-hidden-content">
-				</tr>' .
+      <tr id="nm-hidden-content"></tr>' .
       $hidden .
-      $hidden_options .
-      '</table>',
+      $hidden_options . '</table>',
   );
 
   return $form;

@@ -15,6 +15,7 @@ function nodemanager_ajax_inspect($form, &$form_state) {
 
   $nid = $form_state['values']['nid'];
 
+  // Load node from nid.
   if ($node = node_load($nid)) {
     $node_view = node_view($node, 'full');
     $node_markup = drupal_render($node_view);
@@ -26,15 +27,13 @@ function nodemanager_ajax_inspect($form, &$form_state) {
       '#type' => 'ajax',
       '#commands' => $command,
     );
-  } else {
-    $command = array();
-    $command[] = ajax_command_invoke('#row-buttons-' . $nid . ' span', 'hide');
-    $command[] = ajax_command_append('#row-buttons-' . $nid, '<span class="left bold" style="margin: 0 10px;color:red;line-height:15px;">' . t('Error!') . '</span>');
-    $command[] = array('command' => 'nodeManagerReattach');
+  }
+  // If node can not be loaded display error.
+  else {
 
     return array(
       '#type' => 'ajax',
-      '#commands' => $command,
+      '#commands' => nodemanager_helpers_ajax_attach_error($nid),
     );
   }
 }
