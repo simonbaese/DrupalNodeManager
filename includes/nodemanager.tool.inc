@@ -180,6 +180,7 @@ function nodemanager_form($form, &$form_state) {
   // These are not displayed and triggered by there respective buttons via jQuery.
   $form['inspect_submit'] = nodemanager_common_submits('inspect');
   $form['status_submit'] = nodemanager_common_submits('status');
+  $form['promote_submit'] = nodemanager_common_submits('promote');
 
   // Use this container to hide options on page load. Suffix.
   $form['hide_suffix'] = array('#markup' => '</div>');

@@ -47,8 +47,8 @@
   Drupal.behaviors.nodeManager = {
     attach: function (context) {
 
+      // Functionality for edit option
       $('.nm-edit').once().on('click', function () {
-
         var nid = $(this).data('nid');
         var hiddenContent = $('tr#nm-hidden-content');
         var editOptionRow = $('tr#edit-row-' + nid);
@@ -62,16 +62,16 @@
         }
       });
 
+      // Functionality for inspect option
       $('.nm-inspect').once().on('click', function () {
-
         var nid = $(this).data('nid');
 
         $('input[name=nid]').val(nid);
         $('input[type=submit]#edit-inspect-submit').click();
       });
 
+      // Functionality for status option
       $('.nm-status').once().on('click', function () {
-
         var nid = $(this).data('nid');
         var hiddenContent = $('tr#nm-hidden-content');
         var statusOptionRow = $('tr#status-row-' + nid);
@@ -90,9 +90,34 @@
         }
       });
 
+      // Click submit button for AJAX publish
       $('.nm-status-confirm').once().on('click', function () {
-
         $('input[type=submit]#edit-status-submit').click();
+      });
+
+      // Functionality for promote option
+      $('.nm-promote').once().on('click', function () {
+        var nid = $(this).data('nid');
+        var hiddenContent = $('tr#nm-hidden-content');
+        var promoteOptionRow = $('tr#promote-row-' + nid);
+
+        if (promoteOptionRow.is(':visible')) {
+          promoteOptionRow.insertAfter(hiddenContent);
+        } else {
+          promoteOptionRow.show();
+          $('tr.content-row:not(#content-row-' + nid + ')').insertAfter(hiddenContent);
+          $('tr.row-options').insertAfter(hiddenContent);
+          $('[id^=option-promote]').css('display','none');
+          if($(this).hasClass('nm-promote-true')) $('div#option-promote-false').show();
+          else $('div#option-promote-true').show();
+          $('input[name=nid]').val(nid);
+          promoteOptionRow.insertAfter($('tr#row-' + nid));
+        }
+      });
+
+      // Click submit button for AJAX promote
+      $('.nm-promote-confirm').once().on('click', function () {
+        $('input[type=submit]#edit-promote-submit').click();
       });
 
       // Hide everything on body click
