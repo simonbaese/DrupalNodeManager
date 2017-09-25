@@ -37,3 +37,52 @@ function nodemanager_ajax_inspect($form, &$form_state) {
     );
   }
 }
+
+/**
+ * AJAX callback to publish node.
+ *
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ * @param $form_state
+ *   A keyed array containing the current state of the form.
+ *
+ * @return array $form
+ */
+function nodemanager_ajax_status($form, &$form_state) {
+
+  $nid = $form_state['values']['nid'];
+
+  // Load node from nid.
+  if ($node = node_load($nid)) {
+
+    $command = array();
+    $command[] = ajax_command_invoke(NULL, 'youvoManagerFadeOut', array('tr#status-row-' . $nid));
+
+    if ($node->status) {
+      $node->status = 0;
+      $command[] = ajax_command_invoke('div.nm-status[data-nid=' . $nid . ']', 'removeClass', array('nm-status-true'));
+      $command[] = ajax_command_invoke('div.nm-status[data-nid=' . $nid . ']', 'addClass', array('nm-status-false'));
+    }
+    else {
+      $node->status = 1;
+      $command[] = ajax_command_invoke('div.nm-status[data-nid=' . $nid . ']', 'removeClass', array('nm-status-false'));
+      $command[] = ajax_command_invoke('div.nm-status[data-nid=' . $nid . ']', 'addClass', array('nm-status-true'));
+    }
+
+    node_save($node);
+    $command[] = array('command' => 'nodeManagerReattach');
+
+    return array(
+      '#type' => 'ajax',
+      '#commands' => $command,
+    );
+  }
+  // If node can not be loaded display error.
+  else {
+
+    return array(
+      '#type' => 'ajax',
+      '#commands' => nodemanager_helpers_ajax_attach_error($nid),
+    );
+  }
+}

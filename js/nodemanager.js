@@ -30,6 +30,16 @@
     }
   };
 
+  $.fn.youvoManagerFadeOut = function (selector) {
+
+    $(selector).fadeOut(1195);
+    setTimeout(remove, 1200);
+
+    function remove() {
+      $('#remove_me').remove();
+    }
+  };
+
   Drupal.ajax.prototype.commands.nodeManagerReattach = function (ajax, response, status) {
     Drupal.attachBehaviors();
   };
@@ -46,7 +56,6 @@
         if (editOptionRow.is(':visible')) {
           editOptionRow.insertAfter(hiddenContent);
         } else {
-          hideContent();
           $('tr.content-row:not(#content-row-' + nid + ')').insertAfter(hiddenContent);
           $('tr.row-options').insertAfter(hiddenContent);
           editOptionRow.insertAfter($('tr#row-' + nid));
@@ -59,6 +68,31 @@
 
         $('input[name=nid]').val(nid);
         $('input[type=submit]#edit-inspect-submit').click();
+      });
+
+      $('.nm-status').once().on('click', function () {
+
+        var nid = $(this).data('nid');
+        var hiddenContent = $('tr#nm-hidden-content');
+        var statusOptionRow = $('tr#status-row-' + nid);
+
+        if (statusOptionRow.is(':visible')) {
+          statusOptionRow.insertAfter(hiddenContent);
+        } else {
+          statusOptionRow.show();
+          $('tr.content-row:not(#content-row-' + nid + ')').insertAfter(hiddenContent);
+          $('tr.row-options').insertAfter(hiddenContent);
+          $('[id^=option-status]').css('display','none');
+          if($(this).hasClass('nm-status-true')) $('div#option-status-false').show();
+          else $('div#option-status-true').show();
+          $('input[name=nid]').val(nid);
+          statusOptionRow.insertAfter($('tr#row-' + nid));
+        }
+      });
+
+      $('.nm-status-confirm').once().on('click', function () {
+
+        $('input[type=submit]#edit-status-submit').click();
       });
 
       // Hide everything on body click

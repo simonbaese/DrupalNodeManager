@@ -93,6 +93,26 @@ not within the table at first. */
   height: 15px;
 }
 
+.nm-status-true,
+.nm-promote-true {
+  background: url(icons/correct.svg) no-repeat center center;
+  background-size: 15px 15px;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.nm-status-false,
+.nm-promote-false {
+  background: url(icons/wrong.svg) no-repeat center center;
+  background-size: 15px 15px;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
 .options span {
   margin: 0 5px;
 }
@@ -121,4 +141,9 @@ table.nm .nm-header-promote {
   background: url(icons/promote.svg) no-repeat center center;
   background-size: 20px 20px;
   height: 20px;
+}
+
+table.nm .nm-status-confirm {
+  cursor: pointer;
+  font-weight: bold;
 }

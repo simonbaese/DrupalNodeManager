@@ -94,8 +94,16 @@ function nodemanager_form($form, &$form_state) {
     $rows[] = array(
       'data' => array(
         array('data' => date("m.d.Y", $entry->created)),
-        array('data' => $entry->status, 'class' => array('centered')),
-        array('data' => $entry->promote, 'class' => array('centered')),
+        array('data' => $entry->status ?
+          '<div data-nid="' . $nid . '" class="nm-status nm-status-true"></div>' :
+          '<div data-nid="' . $nid . '" class="nm-status nm-status-false"></div>',
+          'class' => array('centered'),
+        ),
+        array('data' => $entry->promote ?
+          '<div data-nid="' . $nid . '" class="nm-promote nm-promote-true"></div>' :
+          '<div data-nid="' . $nid . '" class="nm-promote nm-promote-false"></div>',
+          'class' => array('centered'),
+        ),
         array('data' => l(check_plain($entry->title), '/node/' . $nid)),
         array('data' => l($author_name, '/user/' . $uid)),
         array('data' => '<div id="row-buttons-' . $nid . '" class="options"></div>'),
@@ -133,6 +141,26 @@ function nodemanager_form($form, &$form_state) {
 					<a href="/node/' . $nid . '/delete" target="_blank">' . t('Delete node') . '</a>
 				</span>
 			</td>
+		</tr>
+		<tr class="border-v row-options" id="status-row-' . $nid . '">
+			<td colspan="' . ($column_count - 1) . '"></td>
+			<td colspan="1">
+				<div class="left">
+					<div id="option-status-true">' . t('Publish node') . '</div>
+					<div id="option-status-false">' . t('Un-publish node') . '</div>
+					<div class="nm-status-confirm">' . t('Confirm') . '</div>
+				</div>
+			</td>
+		</tr>
+		<tr class="border-v row-options" id="promote-row-' . $nid . '">
+			<td colspan="' . ($column_count - 1) . '"></td>
+			<td colspan="1">
+				<div class="left">  
+					<div id="option-promote-true">' . t('Promote node') . '</div>
+					<div id="option-promote-false">' . t('Un-promote node') . '</div>
+					<div class="nm-promote-confirm">' . t('Confirm') . '</div>
+				</div>
+			</td>
 		</tr>';
   }
 
@@ -143,6 +171,7 @@ function nodemanager_form($form, &$form_state) {
   // Here we call the hidden submit functions!
   // These are not displayed and triggered by there respective buttons via jQuery.
   $form['inspect_submit'] = nodemanager_common_submits('inspect');
+  $form['status_submit'] = nodemanager_common_submits('status');
 
   // Use this container to hide options on page load. Suffix.
   $form['hide_suffix'] = array('#markup' => '</div>');
