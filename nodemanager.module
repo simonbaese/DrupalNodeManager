@@ -2,6 +2,7 @@
 
 /**
  * Implements hook_menu()
+ *
  * @inheritdoc
  */
 function nodemanager_menu() {
@@ -21,6 +22,7 @@ function nodemanager_menu() {
 
 /**
  * Implementation of hook_permission().
+ *
  * @inheritdoc
  */
 function nodemanager_permission() {
@@ -36,6 +38,7 @@ function nodemanager_permission() {
 
 /**
  * Implementation of hook_mail().
+ *
  * @inheritdoc
  */
 function nodemanager_mail($key, &$message, $params) {

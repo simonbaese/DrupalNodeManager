@@ -20,7 +20,8 @@ function nodemanager_ajax_inspect($form, &$form_state) {
     $node_view = node_view($node, 'full');
     $node_markup = drupal_render($node_view);
     $command = array();
-    $command[] = ajax_command_invoke(NULL, 'customAttach', array($nid, $node_markup, 1));
+    $command[] = ajax_command_invoke(NULL, 'customAttach',
+      array($nid, $node_markup, 1));
     $command[] = array('command' => 'nodeManagerReattach');
 
     return array(
@@ -56,7 +57,7 @@ function nodemanager_ajax_status($form, &$form_state) {
   if ($node = node_load($nid)) {
 
     $command = array();
-    $command[] = ajax_command_invoke(NULL, 'youvoManagerFadeOut', array('tr#status-row-' . $nid));
+    $command[] = ajax_command_invoke(NULL, 'nodeManagerFadeOut', array('tr#status-row-' . $nid));
 
     if ($node->status) {
       $node->status = 0;

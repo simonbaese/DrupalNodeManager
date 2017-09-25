@@ -30,7 +30,7 @@
     }
   };
 
-  $.fn.youvoManagerFadeOut = function (selector) {
+  $.fn.nodeManagerFadeOut = function (selector) {
 
     $(selector).fadeOut(1195);
     setTimeout(remove, 1200);

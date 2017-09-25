@@ -49,8 +49,14 @@ function nodemanager_form($form, &$form_state) {
   // Set table header.
   $header = array(
     array('data' => t('Created'), 'class' => array('short-column')),
-    array('data' => '<div class="nm-header-status"></div>', 'class' => array('icon-column')),
-    array('data' => '<div class="nm-header-promote"></div>', 'class' => array('icon-column')),
+    array(
+      'data' => '<div class="nm-header-status"></div>',
+      'class' => array('icon-column'),
+    ),
+    array(
+      'data' => '<div class="nm-header-promote"></div>',
+      'class' => array('icon-column'),
+    ),
     array('data' => t('Title'), 'class' => array('long-column')),
     array('data' => t('Author'), 'class' => array('medium-column')),
     array('data' => '', 'class' => array('options-column')),
@@ -94,14 +100,16 @@ function nodemanager_form($form, &$form_state) {
     $rows[] = array(
       'data' => array(
         array('data' => date("m.d.Y", $entry->created)),
-        array('data' => $entry->status ?
-          '<div data-nid="' . $nid . '" class="nm-status nm-status-true"></div>' :
-          '<div data-nid="' . $nid . '" class="nm-status nm-status-false"></div>',
+        array(
+          'data' => $entry->status ?
+            '<div data-nid="' . $nid . '" class="nm-status nm-status-true"></div>' :
+            '<div data-nid="' . $nid . '" class="nm-status nm-status-false"></div>',
           'class' => array('centered'),
         ),
-        array('data' => $entry->promote ?
-          '<div data-nid="' . $nid . '" class="nm-promote nm-promote-true"></div>' :
-          '<div data-nid="' . $nid . '" class="nm-promote nm-promote-false"></div>',
+        array(
+          'data' => $entry->promote ?
+            '<div data-nid="' . $nid . '" class="nm-promote nm-promote-true"></div>' :
+            '<div data-nid="' . $nid . '" class="nm-promote nm-promote-false"></div>',
           'class' => array('centered'),
         ),
         array('data' => l(check_plain($entry->title), '/node/' . $nid)),
@@ -116,7 +124,7 @@ function nodemanager_form($form, &$form_state) {
     The identifier is the id of the container. */
 
     // Button to inspect node.
-    // We need to call youvomanager_common_submits('inspect_submit') later!
+    // We need to call nodemanager_common_submits('inspect_submit') later!
     $buttons .= nodemanager_common_buttons('inspect', $nid);
 
     // Button for editing options.
