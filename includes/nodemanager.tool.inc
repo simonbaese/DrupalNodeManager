@@ -184,11 +184,6 @@ function nodemanager_form($form, &$form_state) {
     '#rows' => 8,
   );
 
-  $form['satte'] = array(
-    '#type' => 'textarea',
-    '#default_value' => 'wurst',
-  );
-
   // Accumulate buttons.
   // Here we deliver the buttons to be rendered.
   $form['buttons'] = array('#markup' => $buttons);
