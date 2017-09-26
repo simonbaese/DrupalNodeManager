@@ -27,6 +27,13 @@ function nodemanager_common_buttons($type, $nid) {
  */
 function nodemanager_common_submits($type) {
 
+  if ($type === 'email') {
+    $elements = array(array('nid'), array('text'));
+  }
+  else {
+    $elements = array(array('nid'));
+  }
+
   return array(
     '#type' => 'submit',
     '#name' => $type . '_submit',
@@ -38,7 +45,7 @@ function nodemanager_common_submits($type) {
       'event' => 'click', // This is important to be able to trigger by jQuery!
     ),
     '#attributes' => array('class' => array('element-invisible')),
-    '#limit_validation_errors' => array(array('nid')),
+    '#limit_validation_errors' => $elements,
     '#submit' => array(),
   );
 }

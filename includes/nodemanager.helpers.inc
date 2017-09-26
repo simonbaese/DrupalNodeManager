@@ -9,9 +9,47 @@
  * @return string
  *   Name of user.
  */
-function nodemanager_helpers_get_author($uid) {
+function nodemanager_helpers_get_name($uid) {
 
   $query = db_select('users', 'u')->fields('u', array('name'));
+  $query->condition('u.uid', $uid);
+
+  return check_plain($query->execute()->fetchField());
+}
+
+/**
+ * Compile email header.
+ *
+ * @param integer $uid
+ *   The user id.
+ *
+ * @return array
+ *   Array with email header information.
+ */
+function nodemanager_helpers_get_email_header($uid) {
+
+  $name = nodemanager_helpers_get_name($uid);
+  $email = nodemanager_helpers_get_email($uid);
+
+  return array(
+    'Sender' => $name . ' <' . $email . '>',
+    'Return-Path' => $email,
+    'From' => $name . ' <' . $email . '>',
+  );
+}
+
+/**
+ * Query for user email with given user id.
+ *
+ * @param integer $uid
+ *   The user id.
+ *
+ * @return string
+ *   Email of user.
+ */
+function nodemanager_helpers_get_email($uid) {
+
+  $query = db_select('users', 'u')->fields('u', array('mail'));
   $query->condition('u.uid', $uid);
 
   return check_plain($query->execute()->fetchField());

@@ -94,7 +94,7 @@ function nodemanager_form($form, &$form_state) {
     $uid = $entry->uid;
 
     // Fetch user name of author.
-    $author_name = nodemanager_helpers_get_author($uid);
+    $author_name = nodemanager_helpers_get_name($uid);
 
     // Fill row.
     $rows[] = array(
@@ -129,6 +129,9 @@ function nodemanager_form($form, &$form_state) {
 
     // Button for editing options.
     $buttons .= nodemanager_common_buttons('edit', $nid);
+
+    // Button for email options.
+    $buttons .= nodemanager_common_buttons('email', $nid);
 
     /* We will use this hidden container to store information that
     should be displayed when a user clicks an option. The display
@@ -172,6 +175,20 @@ function nodemanager_form($form, &$form_state) {
 		</tr>';
   }
 
+  // Add text field for email option.
+  $form['text'] = array(
+    '#type' => 'textarea',
+    '#prefix' => '<div class="left" id="nm-email-text" style="width:100%;">',
+    '#suffix' => '</div>',
+    '#default_value' => t('Hello there!'),
+    '#rows' => 8,
+  );
+
+  $form['satte'] = array(
+    '#type' => 'textarea',
+    '#default_value' => 'wurst',
+  );
+
   // Accumulate buttons.
   // Here we deliver the buttons to be rendered.
   $form['buttons'] = array('#markup' => $buttons);
@@ -181,6 +198,7 @@ function nodemanager_form($form, &$form_state) {
   $form['inspect_submit'] = nodemanager_common_submits('inspect');
   $form['status_submit'] = nodemanager_common_submits('status');
   $form['promote_submit'] = nodemanager_common_submits('promote');
+  $form['email_submit'] = nodemanager_common_submits('email');
 
   // Use this container to hide options on page load. Suffix.
   $form['hide_suffix'] = array('#markup' => '</div>');
@@ -196,6 +214,18 @@ function nodemanager_form($form, &$form_state) {
     '#rows' => $rows,
     '#empty' => t('Nothing to display here!'),
   );
+
+  // We will add further option that are independent of the
+  // current row.
+  $hidden_options .= '<tr class="border-v row-options" id="email-row">
+			<td colspan="' . ($column_count - 1) . '" id="nm-email-option"></td>
+			<td colspan="1">
+				<span class="left">
+					<div>' . t('Send email to author') . '</div>
+					<div class="nm-email-confirm">' . t('Confirm') . '</div>
+				</span>
+			</td>
+		</tr>';
 
   // This form element holds the hidden objects.
   // The first row is used to append content to this table with jQuery.

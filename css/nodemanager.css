@@ -93,6 +93,15 @@ not within the table at first. */
   height: 15px;
 }
 
+.nm-email {
+  background: url(icons/envelope.svg) no-repeat center center;
+  background-size: 15px 15px;
+  cursor: pointer;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+
 .nm-status-true,
 .nm-promote-true {
   background: url(icons/correct.svg) no-repeat center center;
@@ -144,7 +153,8 @@ table.nm .nm-header-promote {
 }
 
 table.nm .nm-status-confirm,
-table.nm .nm-promote-confirm {
+table.nm .nm-promote-confirm,
+table.nm .nm-email-confirm {
   cursor: pointer;
   font-weight: bold;
 }

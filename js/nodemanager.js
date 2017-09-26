@@ -11,14 +11,16 @@
       $('#nm-inspect-id-' + nid).removeClass('rotate');
       contentRow.insertAfter(hiddenContent);
       $('tr#content-row-' + nid + ' td').empty();
-    } else {
+    }
+    else {
       $('tr.content-row').insertAfter(hiddenContent);
       $('span.rotate').removeClass('rotate');
       $('tr.content-row td').empty();
       $('tr#content-row-' + nid + ' td').append(nodeView);
       if ($('div#row-options-' + nid).is(':visible')) {
         contentRow.insertAfter($('tr#row-' + nid).next()).hide();
-      } else {
+      }
+      else {
         contentRow.insertAfter($('tr#row-' + nid));
         $('tr.row-options').insertAfter(hiddenContent);
       }
@@ -26,7 +28,9 @@
         var $set = $(this);
         $set.replaceWith($set.contents());
       });
-      if (rotate) $('#nm-inspect-id-' + nid).addClass('rotate');
+      if (rotate) {
+        $('#nm-inspect-id-' + nid).addClass('rotate');
+      }
     }
   };
 
@@ -36,7 +40,7 @@
     setTimeout(remove, 1200);
 
     function remove() {
-      $('#remove_me').remove();
+      $('#remove-me').remove();
     }
   };
 
@@ -55,11 +59,36 @@
 
         if (editOptionRow.is(':visible')) {
           editOptionRow.insertAfter(hiddenContent);
-        } else {
+        }
+        else {
           $('tr.content-row:not(#content-row-' + nid + ')').insertAfter(hiddenContent);
           $('tr.row-options').insertAfter(hiddenContent);
           editOptionRow.insertAfter($('tr#row-' + nid));
         }
+      });
+
+      // Functionality for email option
+      $('.nm-email').once().on('click', function () {
+        var nid = $(this).data('nid');
+        var hiddenContent = $('tr#nm-hidden-content');
+        var emailOptionRow = $('tr#email-row');
+        var nidVault = $('input[name=nid]');
+
+        if (emailOptionRow.is(':visible') && nidVault.val() === nid.toString()) {
+          emailOptionRow.insertAfter(hiddenContent);
+        }
+        else {
+          emailOptionRow.show();
+          $('tr.content-row:not(#content-row-' + nid + ')').insertAfter(hiddenContent);
+          $('tr.row-options').insertAfter(hiddenContent);
+          nidVault.val(nid);
+          emailOptionRow.insertAfter($('tr#row-' + nid));
+        }
+      });
+
+      // Click submit button for AJAX email send
+      $('.nm-email-confirm').once().on('click', function () {
+        $('input[type=submit]#edit-email-submit').click();
       });
 
       // Functionality for inspect option
@@ -78,13 +107,18 @@
 
         if (statusOptionRow.is(':visible')) {
           statusOptionRow.insertAfter(hiddenContent);
-        } else {
+        }
+        else {
           statusOptionRow.show();
           $('tr.content-row:not(#content-row-' + nid + ')').insertAfter(hiddenContent);
           $('tr.row-options').insertAfter(hiddenContent);
-          $('[id^=option-status]').css('display','none');
-          if($(this).hasClass('nm-status-true')) $('div#option-status-false').show();
-          else $('div#option-status-true').show();
+          $('[id^=option-status]').css('display', 'none');
+          if ($(this).hasClass('nm-status-true')) {
+            $('div#option-status-false').show();
+          }
+          else {
+            $('div#option-status-true').show();
+          }
           $('input[name=nid]').val(nid);
           statusOptionRow.insertAfter($('tr#row-' + nid));
         }
@@ -103,13 +137,18 @@
 
         if (promoteOptionRow.is(':visible')) {
           promoteOptionRow.insertAfter(hiddenContent);
-        } else {
+        }
+        else {
           promoteOptionRow.show();
           $('tr.content-row:not(#content-row-' + nid + ')').insertAfter(hiddenContent);
           $('tr.row-options').insertAfter(hiddenContent);
-          $('[id^=option-promote]').css('display','none');
-          if($(this).hasClass('nm-promote-true')) $('div#option-promote-false').show();
-          else $('div#option-promote-true').show();
+          $('[id^=option-promote]').css('display', 'none');
+          if ($(this).hasClass('nm-promote-true')) {
+            $('div#option-promote-false').show();
+          }
+          else {
+            $('div#option-promote-true').show();
+          }
           $('input[name=nid]').val(nid);
           promoteOptionRow.insertAfter($('tr#row-' + nid));
         }
@@ -133,11 +172,14 @@
         // Move buttons for options into button row of table.
         $('.js-place-btn-row').each(function () {
           var nid = $(this).data('nid');
-          if(!$(this).hasClass('js-placed')) {
+          if (!$(this).hasClass('js-placed')) {
             $('div#row-buttons-' + nid).prepend(this);
             $(this).addClass('js-placed');
           }
         });
+
+        // Move email text field to option panel
+        $('#nm-email-text').appendTo('td#nm-email-option');
 
       });
 
